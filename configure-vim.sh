@@ -1,16 +1,18 @@
 #!/bin/bash
 
-HOME_DIR=$1
+echo "###############"
+echo "# configure vim"
 
-echo "##################"
-echo "# configure vim: $HOME_DIR"
+BUILD_DIR=/tmp/vim
 
-mkdir -p $HOME_DIR/.vim/autoload $HOME_DIR/.vim/bundle && \
-curl -LSso $HOME_DIR/.vim/autoload/pathogen.vim https://tpo.pe/pathogen.vim
+sudo rm -r $BUILD_DIR
 
-git clone https://github.com/fatih/vim-go.git $HOME_DIR/.vim/bundle/vim-go
+mkdir -p $BUILD_DIR/.vim/autoload $BUILD_DIR/.vim/bundle && \
+curl -LSso $BUILD_DIR/.vim/autoload/pathogen.vim https://tpo.pe/pathogen.vim
 
-cat > $HOME_DIR/.vimrc <<DELIM
+git clone https://github.com/fatih/vim-go.git $BUILD_DIR/.vim/bundle/vim-go
+
+cat > $BUILD_DIR/.vimrc <<DELIM
 " https://github.com/tpope/vim-pathogen
 execute pathogen#infect()
 syntax on
@@ -30,4 +32,11 @@ set wildmenu
 " New splits should open below/right of current buffer.
 set splitbelow
 set splitright
+DELIM
+
+sudo chown -R vagrant:vagrant $BUILD_DIR
+
+su - vagrant <<DELIM
+shopt -s dotglob
+mv $BUILD_DIR/* ~
 DELIM
