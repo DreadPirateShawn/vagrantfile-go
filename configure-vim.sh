@@ -5,7 +5,7 @@ echo "# configure vim"
 
 BUILD_DIR=/tmp/vim
 
-sudo rm -r $BUILD_DIR
+sudo rm -rf $BUILD_DIR
 
 mkdir -p $BUILD_DIR/.vim/autoload $BUILD_DIR/.vim/bundle && \
 curl -LSso $BUILD_DIR/.vim/autoload/pathogen.vim https://tpo.pe/pathogen.vim
