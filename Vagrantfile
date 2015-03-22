@@ -21,7 +21,8 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   config.vm.provision :shell, :path => "prep.sh"
 
   config.vm.provision :shell, :path => "install-apt.sh"
-  config.vm.provision :shell, :path => "install-go.sh",  :args => "1.4.2 linux 386"
+  config.vm.provision :shell, :path => "install-go.sh",        :args => "1.4.2 linux 386"
+  config.vm.provision :shell, :path => "install-rrdcached.sh", :args => "1.5.0-rc2"
 
   # Misc configs
   config.vm.provision :file, :source => "~/.gitconfig", :destination => "/home/vagrant/.gitconfig"
